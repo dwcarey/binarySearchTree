@@ -94,11 +94,3 @@ function buildTree(array) {
 }
 
 export { mergeSort, buildTree };
-
-
-
-//bst
-
-
-//base case
-//
