@@ -30,3 +30,14 @@ const dankTree = new Tree([7, 4, 3, 1, 2, 9, 6, 8, 5, 1, 2, 3, 4, 5]);
   console.log(dankTree);
 
   prettyPrint(dankTree.root);
+
+
+
+  dankTree.deleteNode(dankTree.root, 4);
+  console.log(dankTree);
+  prettyPrint(dankTree.root);
+
+
+  dankTree.deleteNode(dankTree.root, 5);
+  console.log(dankTree);
+  prettyPrint(dankTree.root);

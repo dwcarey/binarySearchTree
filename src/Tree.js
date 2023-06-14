@@ -32,40 +32,49 @@ class Tree {
     }
   }
 
-  delete(root, value) {
+  deleteNode(root, value) {
     if (root === null) {
-      // nope
+      return null;
     }
-    if ((root.value !== value) && (value > root.value)) {
-      this.delete(root.rightNode, value);
+    if (value > root.value) {
+      root.rightNode = this.deleteNode(root.rightNode, value);
+      return root;
     }
-    if ((root.value !== value) && (value < root.value)) {
-      this.delete(root.leftNode, value);
+    if (value < root.value) {
+      root.leftNode = this.deleteNode(root.leftNode, value);
+      return root;
     }
-
-    // DELETE
-
-    // variables
-    // previous node (parent of value match node)
-
-    // no children - leaf
-    // value === root.value && root.leftnode === null && root.rightnode === null
-    // return previous node = null
-
-    // one child
-    // value === root.value && (root.leftnode === null || root.rightnode === null)
-    // return parent node = child of deleted node
-
-    // two children
-    // find "next biggest" i.e. go right then left until left node === null
-
-    // if next biggest no children
-    // replace the value of the node being deleted with the value of the next biggest
-    // delete next biggest by setting its parents relevent node to null
-
-    // if next biggest has right node (can't have left node)
-    // replace the value of the node being deleted with the value of the next biggest
-    // set left node of parent of next biggest = to child of next biggest
+    if (root.leftNode === null && root.rightNode === null) {
+      // node to be deleted has no children
+      return null;
+    }
+    if (root.leftNode === null) {
+      // node to be deleted has only a right child
+      return root.rightNode;
+    }
+    if (root.rightNode === null) {
+      // node to be deleted has only a left child
+      return root.leftNode;
+    }
+  
+    // node to be deleted has both left and right children
+    let parentNode = root;
+    let successorNode = root.rightNode;
+  
+    while (successorNode.leftNode !== null) {
+      parentNode = successorNode;
+      successorNode = parentNode.leftNode;
+    }
+  
+    if (parentNode !== root) {
+      parentNode.leftNode = successorNode.rightNode;
+    } else {
+      parentNode.rightNode = successorNode.rightNode;
+    }
+  
+    root.value = successorNode.value;
+  
+    return root;
   }
 }
 export { Tree };
