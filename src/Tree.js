@@ -76,5 +76,22 @@ class Tree {
   
     return root;
   }
+
+  findByValue(root, value) {
+    if (root === null) {
+      return null;
+    }
+    if (value > root.value) {
+      return this.findByValue(root.rightNode, value);
+    }
+    if (value < root.value) {
+      return this.findByValue(root.leftNode, value);
+    }
+
+    if (value === root.value) {
+      return root;
+    }
+
+  }
 }
 export { Tree };
