@@ -56,24 +56,24 @@ class Tree {
       // node to be deleted has only a left child
       return root.leftNode;
     }
-  
+
     // node to be deleted has both left and right children
     let parentNode = root;
     let successorNode = root.rightNode;
-  
+
     while (successorNode.leftNode !== null) {
       parentNode = successorNode;
       successorNode = parentNode.leftNode;
     }
-  
+
     if (parentNode !== root) {
       parentNode.leftNode = successorNode.rightNode;
     } else {
       parentNode.rightNode = successorNode.rightNode;
     }
-  
+
     root.value = successorNode.value;
-  
+
     return root;
   }
 
@@ -91,7 +91,40 @@ class Tree {
     if (value === root.value) {
       return root;
     }
+  }
 
+  levelOrderTraveral(root, func = null) {
+    if (root === null) {
+      return null;
+    }
+
+    const traversalQueue = [root];
+    const result = [];
+
+    while (traversalQueue.length > 0) {
+      const currentNode = traversalQueue.shift(0);
+
+      if (currentNode.leftNode !== null) {
+        traversalQueue.push(currentNode.leftNode);
+      }
+      
+      if (currentNode.rightNode !== null) {
+        traversalQueue.push(currentNode.rightNode);
+      }
+
+
+      if (func !== null) {
+        func(currentNode);
+      }
+
+      result.push(currentNode.value);
+    }
+
+    return result;
+  }
+
+  printNode(printNode) {
+    console.log(printNode);
   }
 }
 export { Tree };

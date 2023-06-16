@@ -47,3 +47,7 @@ const dankTree = new Tree([7, 4, 3, 1, 2, 9, 6, 8, 5, 1, 2, 3, 4, 5]);
   console.log(dankTree.findByValue(dankTree.root, 11));
   console.log(dankTree.findByValue(dankTree.root, 12));
   console.log(dankTree.findByValue(dankTree.root, 446));
+
+
+
+  console.log(dankTree.levelOrderTraveral(dankTree.root, dankTree.printNode));
