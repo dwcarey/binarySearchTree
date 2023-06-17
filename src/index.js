@@ -1,7 +1,21 @@
 import { Tree } from "./Tree";
 import { Node } from "./Node";
 
-const dankTree = new Tree([7, 4, 3, 1, 2, 9, 6, 8, 5, 1, 2, 3, 4, 5]);
+function random100array() {
+  const randomArray = [];
+  for (let i = 0; i < 100; i += 1) {
+    randomArray.push(i);
+  }
+  for (let i = randomArray.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = randomArray[i];
+    randomArray[i] = randomArray[j];
+    randomArray[j] = temp;
+  }
+  return randomArray;
+}
+
+const dankTree = new Tree(random100array());
     console.log(dankTree);
 
 
@@ -19,43 +33,46 @@ const dankTree = new Tree([7, 4, 3, 1, 2, 9, 6, 8, 5, 1, 2, 3, 4, 5]);
     }
   };
 
-  prettyPrint(dankTree.root);
-
-  dankTree.insert(dankTree.root, 12);
-  dankTree.insert(dankTree.root, 11);
-  dankTree.insert(dankTree.root, 0);
-  dankTree.insert(dankTree.root, 13);
-  dankTree.insert(dankTree.root, 14);
-  dankTree.insert(dankTree.root, 6);
-
-  console.log(dankTree);
+  //assignment driver code
 
   prettyPrint(dankTree.root);
+  console.log(dankTree.isBalanced(dankTree.root));
 
-
-
-  dankTree.deleteNode(dankTree.root, 4);
-  console.log(dankTree);
-  prettyPrint(dankTree.root);
-
-
-  dankTree.deleteNode(dankTree.root, 5);
-  console.log(dankTree);
-  prettyPrint(dankTree.root);
-
-  console.log(dankTree.findByValue(dankTree.root, 6));
-  console.log(dankTree.findByValue(dankTree.root, 11));
-  console.log(dankTree.findByValue(dankTree.root, 12));
-  console.log(dankTree.findByValue(dankTree.root, 446));
-
-
-
+  console.log('level order traversal');
   console.log(dankTree.levelOrderTraversal(dankTree.root, dankTree.printNode));
-
+  console.log('pre order traversal');
+  console.log(dankTree.preOrderTraversal(dankTree.root, dankTree.printNode));
+  console.log('post order traversal');
+  console.log(dankTree.postOrderTraversal(dankTree.root, dankTree.printNode));
+  console.log('in order traversal');
   console.log(dankTree.inOrderTraversal(dankTree.root, dankTree.printNode));
 
+  dankTree.insert(dankTree.root, 123);
+  dankTree.insert(dankTree.root, 112);
+  dankTree.insert(dankTree.root, 1235);
+  dankTree.insert(dankTree.root, 1323);
+  dankTree.insert(dankTree.root, 1524);
+  dankTree.insert(dankTree.root, 63521);
+  dankTree.insert(dankTree.root, 122);
+  dankTree.insert(dankTree.root, 1311);
+  dankTree.insert(dankTree.root, 12340);
+  dankTree.insert(dankTree.root, 12143);
+  dankTree.insert(dankTree.root, 11244);
+  dankTree.insert(dankTree.root, 61313);
+
+  prettyPrint(dankTree.root);
+  console.log(dankTree.isBalanced(dankTree.root));
+
+  dankTree.root = dankTree.balanceTree(dankTree.root);
+
+  prettyPrint(dankTree.root);
+  console.log(dankTree.isBalanced(dankTree.root));
+
+  console.log('level order traversal');
+  console.log(dankTree.levelOrderTraversal(dankTree.root, dankTree.printNode));
+  console.log('pre order traversal');
   console.log(dankTree.preOrderTraversal(dankTree.root, dankTree.printNode));
-
+  console.log('post order traversal');
   console.log(dankTree.postOrderTraversal(dankTree.root, dankTree.printNode));
-
-  console.log(dankTree.getHeight(dankTree.root));
+  console.log('in order traversal');
+  console.log(dankTree.inOrderTraversal(dankTree.root, dankTree.printNode));

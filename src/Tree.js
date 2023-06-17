@@ -123,7 +123,6 @@ class Tree {
   }
 
   printNode(printNode) {
-    console.log(printNode);
   }
 
   getHeight(node) {
@@ -143,6 +142,29 @@ class Tree {
       return leftHeight + 1;
     }
     return rightHeight + 1;
+  }
+
+  getDepth(node, root) {
+    let depth = 0;
+    console.log(node);
+
+    if (node === null) {
+      return 0;
+    }
+
+    let currentNode = root;
+    console.log(currentNode);
+
+    while (currentNode.value !== node.value) {
+      if (node.value < currentNode.value) {
+        depth += 1;
+        currentNode = currentNode.leftNode;
+      } else {
+        depth += 1;
+        currentNode = currentNode.rightNode;
+      }
+    }
+    return depth + 1;
   }
 
   // all of left last left first, then root, then all of right, left first
@@ -227,7 +249,26 @@ class Tree {
     return result;
   }
 
-  // nodes from current node to leaf node
+  isBalanced(root) {
+    const leftHeight = this.getHeight(root.leftNode);
+    const rightHeight = this.getHeight(root.rightNode);
 
+    if ((leftHeight > rightHeight) && (leftHeight - rightHeight > 1)) {
+      return false;
+    }
+
+    if ((leftHeight < rightHeight) && (rightHeight - leftHeight > 1)) {
+      return false;
+    }
+    return false;
+  }
+
+  balanceTree(root) {
+    const sortedArray = this.inOrderTraversal(root);
+    console.log(sortedArray);
+
+    const newBST = buildTree(sortedArray);
+    return newBST;
+  }
 }
 export { Tree };
