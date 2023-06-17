@@ -93,7 +93,7 @@ class Tree {
     }
   }
 
-  levelOrderTraveral(root, func = null) {
+  levelOrderTraversal(root, func = null) {
     if (root === null) {
       return null;
     }
@@ -107,11 +107,10 @@ class Tree {
       if (currentNode.leftNode !== null) {
         traversalQueue.push(currentNode.leftNode);
       }
-      
+
       if (currentNode.rightNode !== null) {
         traversalQueue.push(currentNode.rightNode);
       }
-
 
       if (func !== null) {
         func(currentNode);
@@ -126,5 +125,109 @@ class Tree {
   printNode(printNode) {
     console.log(printNode);
   }
+
+  getHeight(node) {
+    let leftHeight = 0;
+    let rightHeight = 0;
+    if (node === null) {
+      return 0;
+    }
+    if (node.leftNode !== null) {
+      leftHeight = this.getHeight(node.leftNode);
+    }
+    if (node.rightNode !== null) {
+      rightHeight = this.getHeight(node.rightNode);
+    }
+
+    if (leftHeight > rightHeight) {
+      return leftHeight + 1;
+    }
+    return rightHeight + 1;
+  }
+
+  // all of left last left first, then root, then all of right, left first
+  inOrderTraversal(root, func = null) {
+    if (root === null) {
+      return [];
+    }
+
+    const result = [];
+
+    function traverse(node) {
+      if (node.leftNode !== null) {
+        traverse(node.leftNode);
+      }
+
+      result.push(node.value);
+
+      if (func !== null) {
+        func(node);
+      }
+
+      if (node.rightNode !== null) {
+        traverse(node.rightNode);
+      }
+    }
+
+    traverse(root);
+
+    return result;
+  }
+
+  preOrderTraversal(root, func = null) {
+    if (root === null) {
+      return [];
+    }
+
+    const result = [];
+
+    function traverse(node) {
+      if (node === null) {
+        return;
+      }
+
+      result.push(node.value);
+
+      if (func !== null) {
+        func(node);
+      }
+
+      traverse(node.leftNode);
+      traverse(node.rightNode);
+    }
+
+    traverse(root);
+
+    return result;
+  }
+
+  postOrderTraversal(root, func = null) {
+    if (root === null) {
+      return [];
+    }
+
+    const result = [];
+
+    function traverse(node) {
+      if (node === null) {
+        return;
+      }
+      traverse(node.rightNode);
+      traverse(node.leftNode);
+
+      result.push(node.value);
+
+      if (func !== null) {
+        func(node);
+      }
+    }
+
+    traverse(root);
+
+    return result;
+  }
+
+  // nodes from current node to leaf node
+
 }
 export { Tree };

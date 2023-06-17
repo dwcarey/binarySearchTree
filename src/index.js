@@ -50,4 +50,12 @@ const dankTree = new Tree([7, 4, 3, 1, 2, 9, 6, 8, 5, 1, 2, 3, 4, 5]);
 
 
 
-  console.log(dankTree.levelOrderTraveral(dankTree.root, dankTree.printNode));
+  console.log(dankTree.levelOrderTraversal(dankTree.root, dankTree.printNode));
+
+  console.log(dankTree.inOrderTraversal(dankTree.root, dankTree.printNode));
+
+  console.log(dankTree.preOrderTraversal(dankTree.root, dankTree.printNode));
+
+  console.log(dankTree.postOrderTraversal(dankTree.root, dankTree.printNode));
+
+  console.log(dankTree.getHeight(dankTree.root));
